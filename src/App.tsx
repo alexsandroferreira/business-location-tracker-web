@@ -1,11 +1,12 @@
-import { RouterProvider } from "react-router-dom";
-import { router } from "./routes";
-import { Toaster } from "sonner";
+import { RouterProvider } from 'react-router-dom'
+import { Toaster } from 'sonner'
+
+import { router } from './routes'
 
 export function App() {
   return (
     <>
-    <Toaster richColors closeButton/>
+      <Toaster richColors closeButton />
       <RouterProvider router={router} />
     </>
   )

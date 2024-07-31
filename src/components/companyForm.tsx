@@ -1,5 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Stack, TextField, Typography } from '@mui/material'
+import {
+  Button,
+  Stack,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -25,6 +31,7 @@ const companyFormSchema = z.object({
 type CompanyFormData = z.infer<typeof companyFormSchema>
 
 export function CompanyForm() {
+  const isSmallScreen = useMediaQuery('(max-width:600px)')
   const {
     register,
     handleSubmit,
@@ -39,7 +46,11 @@ export function CompanyForm() {
   }
   return (
     <>
-      <Typography color="primary" variant="h3">
+      <Typography
+        color="primary"
+        variant={isSmallScreen ? 'h4' : 'h3'}
+        gutterBottom
+      >
         Registre sua Empresa
       </Typography>
       <form onSubmit={handleSubmit(handleRegisterCompany)}>

@@ -1,13 +1,24 @@
+import { Container, Grid, Typography } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 
 export function AppLayout() {
   return (
-    <div>
-      <h1>Cabeçalho</h1>
-
-      <div>
-        <Outlet />
-      </div>
-    </div>
+    <Container maxWidth="lg">
+      <Grid container spacing={2} direction="column">
+        <Grid item>
+          <Typography variant="h4" component="header" gutterBottom>
+            Cabeçalho
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Outlet />
+        </Grid>
+        <Grid item>
+          <Typography variant="body1" component="footer">
+            Rodapé
+          </Typography>
+        </Grid>
+      </Grid>
+    </Container>
   )
 }
