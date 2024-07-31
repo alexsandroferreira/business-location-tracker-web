@@ -11,6 +11,7 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { getLocationCompany } from '../api/get-location-company'
+import type { CompanyData } from '../interface'
 
 const companyFormSchema = z.object({
   companyName: z
@@ -44,22 +45,18 @@ export function CompanyForm() {
   })
 
   async function handleRegisterCompany(data: CompanyFormData) {
-    console.log(data)
-
     try {
       const address = `${data.streetname} ${data.housenumber}, ${data.city}, ${data.state}, ${data.country}`
 
       const coordinates = await getLocationCompany(address)
 
-      console.log('coordinates:', coordinates)
-
-      const companyData = {
+      const companyData: CompanyData = {
         ...data,
+        place_id: coordinates.place_id,
         lat: coordinates.lat,
         lon: coordinates.lon,
       }
 
-      console.log(companyData, '<=====conpanyData')
       const storedCompanies = localStorage.getItem('companies')
       const companies = storedCompanies ? JSON.parse(storedCompanies) : []
       companies.push(companyData)
@@ -68,7 +65,7 @@ export function CompanyForm() {
       reset()
       toast.success('cadastro com sucesso')
     } catch (error) {
-      toast.error('cadastro com sucesso')
+      toast.error('Falha ao registrar empresa')
     }
   }
   return (
