@@ -1,3 +1,9 @@
+import { CompanyForm } from '../../components/companyForm'
+
 export function Home() {
-  return <div>home</div>
+  return (
+    <div>
+      <CompanyForm />
+    </div>
+  )
 }
