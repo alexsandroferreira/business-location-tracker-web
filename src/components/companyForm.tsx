@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Button,
-  Stack,
+  Grid,
   TextField,
   Typography,
   useMediaQuery,
@@ -10,22 +10,24 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
+import { getLocationCompany } from '../api/get-location-company'
+
 const companyFormSchema = z.object({
   companyName: z
     .string()
     .nonempty({ message: 'Nome da empresa é obrigatório' }),
-  businessName: z
-    .string()
-    .length(14, { message: 'CNPJ deve ter 14 caracteres' }),
-  cnpj: z.string().length(14, { message: 'CNPJ deve ter 14 caracteres' }),
+  businessName: z.string({ message: 'Nome fantasiaé obrigatório' }),
+  cnpj: z.string({ message: 'CNPJ deve ter 14 caracteres' }),
   streetname: z.string().nonempty({ message: 'Rua é obrigatório' }),
   housenumber: z.string().nonempty({ message: 'Numero é obrigatório' }),
-  postalcode: z.number({ message: 'Cep é obrigatório' }),
+  postalcode: z.string({ message: 'Cep é obrigatório' }),
   city: z.string().nonempty({ message: 'Cidade é obrigatória' }),
   state: z.string().nonempty({ message: 'Estado é obrigatório' }),
   country: z.string().nonempty({ message: 'País é obrigatório' }),
   county: z.string().nonempty({ message: 'Bairro é obrigatório' }),
   complement: z.string().optional(),
+  lat: z.string().optional(),
+  lon: z.string().optional(),
 })
 
 type CompanyFormData = z.infer<typeof companyFormSchema>
@@ -36,13 +38,38 @@ export function CompanyForm() {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
+    reset,
   } = useForm<CompanyFormData>({
     resolver: zodResolver(companyFormSchema),
   })
 
   async function handleRegisterCompany(data: CompanyFormData) {
     console.log(data)
-    toast.success('cadastro com sucesso')
+
+    try {
+      const address = `${data.streetname} ${data.housenumber}, ${data.city}, ${data.state}, ${data.country}`
+
+      const coordinates = await getLocationCompany(address)
+
+      console.log('coordinates:', coordinates)
+
+      const companyData = {
+        ...data,
+        lat: coordinates.lat,
+        lon: coordinates.lon,
+      }
+
+      console.log(companyData, '<=====conpanyData')
+      const storedCompanies = localStorage.getItem('companies')
+      const companies = storedCompanies ? JSON.parse(storedCompanies) : []
+      companies.push(companyData)
+      localStorage.setItem('companies', JSON.stringify(companies))
+
+      reset()
+      toast.success('cadastro com sucesso')
+    } catch (error) {
+      toast.error('cadastro com sucesso')
+    }
   }
   return (
     <>
@@ -54,94 +81,138 @@ export function CompanyForm() {
         Registre sua Empresa
       </Typography>
       <form onSubmit={handleSubmit(handleRegisterCompany)}>
-        <Stack spacing={2} width={400}>
-          <TextField
-            label="Nome da Empresa"
-            type="text"
-            {...register('companyName')}
-            error={!!errors.companyName}
-            helperText={errors.companyName?.message}
-          />
-          <TextField
-            label="CNPJ"
-            type="text"
-            {...register('cnpj')}
-            error={!!errors.cnpj}
-            helperText={errors.cnpj?.message}
-          />
-          <TextField
-            label="Nome Fantasia"
-            type="text"
-            {...register('businessName')}
-            error={!!errors.businessName}
-            helperText={errors.businessName?.message}
-          />
-          <TextField
-            label="Pais"
-            type="text"
-            {...register('country')}
-            error={!!errors.country}
-            helperText={errors.country?.message}
-          />
-          <TextField
-            label="Nome da Estado"
-            type="text"
-            {...register('state')}
-            error={!!errors.state}
-            helperText={errors.state?.message}
-          />
-          <TextField
-            label="Cidade"
-            type="text"
-            {...register('city')}
-            error={!!errors.city}
-            helperText={errors.city?.message}
-          />
-          <TextField
-            label="CEP"
-            type="number"
-            {...register('postalcode')}
-            error={!!errors.postalcode}
-            helperText={errors.postalcode?.message}
-          />
-          <TextField
-            label="Bairro"
-            type="text"
-            {...register('county')}
-            error={!!errors.county}
-            helperText={errors.county?.message}
-          />
-          <TextField
-            label="Rua"
-            type="text"
-            {...register('streetname')}
-            error={!!errors.streetname}
-            helperText={errors.streetname?.message}
-          />
-          <TextField
-            label="Número"
-            type="text"
-            {...register('housenumber')}
-            error={!!errors.housenumber}
-            helperText={errors.housenumber?.message}
-          />
-          <TextField
-            label="Complemento"
-            type="text"
-            {...register('complement')}
-            error={!!errors.complement}
-            helperText={errors.complement?.message}
-          />
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="Nome da Empresa"
+              type="text"
+              fullWidth
+              {...register('companyName')}
+              error={!!errors.companyName}
+              helperText={errors.companyName?.message}
+            />
+          </Grid>
 
-          <Button
-            disabled={isSubmitting}
-            type="submit"
-            variant="contained"
-            color="primary"
-          >
-            Registre
-          </Button>
-        </Stack>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="CNPJ"
+              type="text"
+              fullWidth
+              {...register('cnpj')}
+              error={!!errors.cnpj}
+              helperText={errors.cnpj?.message}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="Nome Fantasia"
+              type="text"
+              fullWidth
+              {...register('businessName')}
+              error={!!errors.businessName}
+              helperText={errors.businessName?.message}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="Pais"
+              type="text"
+              fullWidth
+              {...register('country')}
+              error={!!errors.country}
+              helperText={errors.country?.message}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="Nome da Estado"
+              type="text"
+              fullWidth
+              {...register('state')}
+              error={!!errors.state}
+              helperText={errors.state?.message}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="Cidade"
+              type="text"
+              fullWidth
+              {...register('city')}
+              error={!!errors.city}
+              helperText={errors.city?.message}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="CEP"
+              type="text"
+              fullWidth
+              {...register('postalcode')}
+              error={!!errors.postalcode}
+              helperText={errors.postalcode?.message}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="Bairro"
+              type="text"
+              fullWidth
+              {...register('county')}
+              error={!!errors.county}
+              helperText={errors.county?.message}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="Rua"
+              type="text"
+              fullWidth
+              {...register('streetname')}
+              error={!!errors.streetname}
+              helperText={errors.streetname?.message}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="Número"
+              type="text"
+              fullWidth
+              {...register('housenumber')}
+              error={!!errors.housenumber}
+              helperText={errors.housenumber?.message}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="Complemento"
+              type="text"
+              fullWidth
+              {...register('complement')}
+              error={!!errors.complement}
+              helperText={errors.complement?.message}
+            />
+          </Grid>
+          <Grid item xs={12} container justifyContent="center">
+            <Button
+              disabled={isSubmitting}
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
+              Registre
+            </Button>
+          </Grid>
+        </Grid>
       </form>
     </>
   )

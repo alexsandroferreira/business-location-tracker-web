@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 export function AppLayout() {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Grid container spacing={2} direction="column">
         <Grid item>
           <Typography variant="h4" component="header" gutterBottom>
