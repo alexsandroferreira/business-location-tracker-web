@@ -11,8 +11,8 @@ interface MapProps {
 export function Map({ companies }: MapProps) {
   return (
     <MapContainer
-      center={[-30.02768, -51.22864]}
-      zoom={6}
+      center={[-14.235004, -51.925282]}
+      zoom={4}
       scrollWheelZoom={false}
       style={{ height: '100%', width: '100%' }}
     >
