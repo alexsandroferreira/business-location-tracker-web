@@ -8,32 +8,17 @@ import {
 } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { z } from 'zod'
 
 import { getLocationCompany } from '../api/get-location-company'
-import type { CompanyData } from '../interface'
+import { CompanyData } from '../interface'
+import { insertMaskInCEP, insertMaskInCNPJ } from '../utils/mask'
+import { companyFormSchema } from '../validators/schemas'
+import { CompanyFormData } from '../validators/types'
 
-const companyFormSchema = z.object({
-  companyName: z
-    .string()
-    .nonempty({ message: 'Nome da empresa é obrigatório' }),
-  businessName: z.string({ message: 'Nome fantasiaé obrigatório' }),
-  cnpj: z.string({ message: 'CNPJ deve ter 14 caracteres' }),
-  streetname: z.string().nonempty({ message: 'Rua é obrigatório' }),
-  housenumber: z.string().nonempty({ message: 'Numero é obrigatório' }),
-  postalcode: z.string({ message: 'Cep é obrigatório' }),
-  city: z.string().nonempty({ message: 'Cidade é obrigatória' }),
-  state: z.string().nonempty({ message: 'Estado é obrigatório' }),
-  country: z.string().nonempty({ message: 'País é obrigatório' }),
-  county: z.string().nonempty({ message: 'Bairro é obrigatório' }),
-  complement: z.string().optional(),
-  lat: z.string().optional(),
-  lon: z.string().optional(),
-})
-
-type CompanyFormData = z.infer<typeof companyFormSchema>
-
-export function CompanyForm() {
+interface CompanyFormProps {
+  onAddCompany: (company: CompanyData) => void
+}
+export function CompanyForm({ onAddCompany }: CompanyFormProps) {
   const isSmallScreen = useMediaQuery('(max-width:600px)')
   const {
     register,
@@ -57,17 +42,15 @@ export function CompanyForm() {
         lon: coordinates.lon,
       }
 
-      const storedCompanies = localStorage.getItem('companies')
-      const companies = storedCompanies ? JSON.parse(storedCompanies) : []
-      companies.push(companyData)
-      localStorage.setItem('companies', JSON.stringify(companies))
-
+      onAddCompany(companyData)
       reset()
+
       toast.success('cadastro com sucesso')
     } catch (error) {
       toast.error('Falha ao registrar empresa')
     }
   }
+
   return (
     <>
       <Typography
@@ -98,6 +81,9 @@ export function CompanyForm() {
               {...register('cnpj')}
               error={!!errors.cnpj}
               helperText={errors.cnpj?.message}
+              onChange={(e) => {
+                e.target.value = insertMaskInCNPJ(e.target.value)
+              }}
             />
           </Grid>
 
@@ -153,6 +139,9 @@ export function CompanyForm() {
               {...register('postalcode')}
               error={!!errors.postalcode}
               helperText={errors.postalcode?.message}
+              onChange={(e) => {
+                e.target.value = insertMaskInCEP(e.target.value)
+              }}
             />
           </Grid>
 

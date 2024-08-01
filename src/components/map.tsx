@@ -1,23 +1,14 @@
 import 'leaflet/dist/leaflet.css'
 
-import { useEffect, useState } from 'react'
+import { Card, CardContent, Typography } from '@mui/material'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
-import type { CompanyData } from '../interface'
+import { CompanyData } from '../interface'
+interface MapProps {
+  companies: CompanyData[]
+}
 
-export function Map() {
-  const [companies, setCompanies] = useState<CompanyData[]>([])
-
-  function loadCompaniesFromLocalStorage() {
-    const storedCompanies = localStorage.getItem('companies')
-    if (storedCompanies) {
-      setCompanies(JSON.parse(storedCompanies))
-    }
-  }
-
-  useEffect(() => {
-    loadCompaniesFromLocalStorage()
-  }, [])
+export function Map({ companies }: MapProps) {
   return (
     <MapContainer
       center={[-30.02768, -51.22864]}
@@ -29,9 +20,16 @@ export function Map() {
       {companies.map((company) => (
         <Marker key={company.place_id} position={[company.lat, company.lon]}>
           <Popup>
-            <strong>{company.companyName}</strong>
-            <br />
-            CNPJ: {company.cnpj}
+            <Card>
+              <CardContent>
+                <Typography variant="body2" color="textSecondary">
+                  <strong>Nome da Fantasia:</strong> {company.businessName}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  <strong>CNPJ:</strong> {company.cnpj}
+                </Typography>
+              </CardContent>
+            </Card>
           </Popup>
         </Marker>
       ))}
