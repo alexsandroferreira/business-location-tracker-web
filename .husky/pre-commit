@@ -1,0 +1,7 @@
+echo '🚧 Check for linting erros and fix'
+
+npm run lint || (echo '❌ Linting errors. Please fix then before commiting.' && exit 1)
+
+git add .
+
+echo '✅ Linting passed without errors. Commit allowed.' && echo ''

@@ -11,10 +11,11 @@ import {
   Typography,
 } from '@mui/material'
 import { MouseEvent, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 export function Navbar() {
   const [anchorNav, setAnchorNav] = useState<null | HTMLElement>(null)
+  const location = useLocation()
 
   const openMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorNav(event.currentTarget)
@@ -24,18 +25,32 @@ export function Navbar() {
     setAnchorNav(null)
   }
 
+  const getButtonStyle = (path: string) => {
+    return location.pathname === path ? { color: 'secondary.main' } : {}
+  }
+
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Business Tracker
         </Typography>
 
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Button color="inherit" component={Link} to="/hero">
+          <Button
+            color="inherit"
+            component={Link}
+            to="/hero"
+            sx={getButtonStyle('/hero')}
+          >
             Hero
           </Button>
-          <Button color="inherit" component={Link} to="/">
+          <Button
+            color="inherit"
+            component={Link}
+            to="/"
+            sx={getButtonStyle('/')}
+          >
             Register
           </Button>
         </Box>
@@ -58,10 +73,20 @@ export function Navbar() {
             sx={{ display: { xs: 'flex', md: 'none' } }}
           >
             <MenuList>
-              <MenuItem onClick={closeMenu} component={Link} to="/hero">
+              <MenuItem
+                onClick={closeMenu}
+                component={Link}
+                to="/hero"
+                sx={getButtonStyle('/hero')}
+              >
                 Hero
               </MenuItem>
-              <MenuItem onClick={closeMenu} component={Link} to="/">
+              <MenuItem
+                onClick={closeMenu}
+                component={Link}
+                to="/"
+                sx={getButtonStyle('/')}
+              >
                 Register
               </MenuItem>
             </MenuList>

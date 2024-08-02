@@ -13,13 +13,13 @@ export function Home() {
     <StyledHome>
       <Container maxWidth="xl" component="div">
         <Grid container spacing={4} alignItems="center">
-          <Grid id="gid-item-form" item xs={12} md={6} lg={5}>
+          <Grid item xs={12} md={6} lg={5}>
             <Box id="box-wrapper" position="relative">
-              <BackgroundWrapper id="wrapper">
+              <BackgroundWrapper>
                 <AnimatedBackground />
               </BackgroundWrapper>
               <ContentWrapper>
-                <Paper id="paper" elevation={3} style={{ padding: '12px' }}>
+                <Paper elevation={3} style={{ padding: '12px' }}>
                   <CompanyForm onAddCompany={handleAddCompany} />
                 </Paper>
               </ContentWrapper>
