@@ -7,9 +7,20 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material'
+import L from 'leaflet'
+import markerIcon from 'leaflet/dist/images/marker-icon.png'
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
+import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
+import logoSvg from '../../public/logo-web.svg'
 import { CompanyData } from '../interface'
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: markerIcon2x,
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+})
 interface MapProps {
   companies: CompanyData[]
 }
@@ -22,7 +33,10 @@ export function Map({ companies }: MapProps) {
       scrollWheelZoom={false}
       style={{ height: '100%', width: '100%' }}
     >
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
       {companies.map((company) => (
         <Marker key={company.place_id} position={[company.lat, company.lon]}>
           <Card sx={{ maxWidth: 345, borderRadius: 2, boxShadow: 3 }}>
@@ -31,7 +45,7 @@ export function Map({ companies }: MapProps) {
                 <CardMedia
                   component="img"
                   height="120"
-                  image="../../public/logo-web.svg"
+                  image={logoSvg}
                   sx={{ objectFit: 'contain' }}
                 />
                 <CardContent>
