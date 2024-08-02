@@ -11,6 +11,7 @@ export function AppLayout() {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
+        backgroundColor: 'background.default',
       }}
     >
       <Navbar />
@@ -22,9 +23,11 @@ export function AppLayout() {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
+          paddingTop: '12px',
+          paddingottom: '12px',
         }}
       >
-        <Grid container spacing={2} direction="column">
+        <Grid container direction="column">
           <Grid item>
             <Outlet />
           </Grid>

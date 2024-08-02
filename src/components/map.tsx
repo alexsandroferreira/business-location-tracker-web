@@ -1,6 +1,12 @@
 import 'leaflet/dist/leaflet.css'
 
-import { Card, CardContent, Typography } from '@mui/material'
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+} from '@mui/material'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
 import { CompanyData } from '../interface'
@@ -19,18 +25,31 @@ export function Map({ companies }: MapProps) {
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {companies.map((company) => (
         <Marker key={company.place_id} position={[company.lat, company.lon]}>
-          <Popup>
-            <Card>
-              <CardContent>
-                <Typography variant="body2" color="textSecondary">
-                  <strong>Nome da Fantasia:</strong> {company.businessName}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  <strong>CNPJ:</strong> {company.cnpj}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Popup>
+          <Card sx={{ maxWidth: 345, borderRadius: 2, boxShadow: 3 }}>
+            <Popup>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="120"
+                  image="../../public/logo-web.svg"
+                  sx={{ objectFit: 'contain' }}
+                />
+                <CardContent>
+                  <Typography variant="h6" component="div">
+                    <strong>Empresa</strong>
+                  </Typography>
+                  <Typography variant="body2">
+                    <strong>Nome da Fantasia: </strong>
+                    {company.businessName}
+                  </Typography>
+
+                  <Typography variant="body2">
+                    <strong>CNPJ:</strong> {company.cnpj}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Popup>
+          </Card>
         </Marker>
       ))}
     </MapContainer>

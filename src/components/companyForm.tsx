@@ -47,7 +47,9 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
 
       toast.success('cadastro com sucesso')
     } catch (error) {
-      toast.error('Falha ao registrar empresa')
+      toast.error(
+        'Houve uma falha ao registrar a empresa. Por favor, verifique o endereço informado.',
+      )
     }
   }
 
@@ -62,7 +64,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
       </Typography>
       <form onSubmit={handleSubmit(handleRegisterCompany)}>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12}>
             <TextField
               label="Nome da Empresa"
               type="text"
@@ -72,8 +74,18 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               helperText={errors.companyName?.message}
             />
           </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Nome Fantasia"
+              type="text"
+              fullWidth
+              {...register('businessName')}
+              error={!!errors.businessName}
+              helperText={errors.businessName?.message}
+            />
+          </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={7}>
             <TextField
               label="CNPJ"
               type="text"
@@ -87,31 +99,21 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={5}>
             <TextField
-              label="Nome Fantasia"
-              type="text"
-              fullWidth
-              {...register('businessName')}
-              error={!!errors.businessName}
-              helperText={errors.businessName?.message}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label="Pais"
+              label="País"
               type="text"
               fullWidth
               {...register('country')}
               error={!!errors.country}
               helperText={errors.country?.message}
+              autoComplete="off"
             />
           </Grid>
 
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Nome da Estado"
+              label="Estado"
               type="text"
               fullWidth
               {...register('state')}
@@ -156,7 +158,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={8}>
             <TextField
               label="Rua"
               type="text"
@@ -167,7 +169,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
               label="Número"
               type="text"
@@ -178,7 +180,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12}>
             <TextField
               label="Complemento"
               type="text"
@@ -186,6 +188,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               {...register('complement')}
               error={!!errors.complement}
               helperText={errors.complement?.message}
+              autoComplete="off"
             />
           </Grid>
           <Grid item xs={12} container justifyContent="center">
