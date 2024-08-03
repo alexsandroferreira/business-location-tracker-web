@@ -26,7 +26,7 @@ export function Home() {
             </Box>
           </Grid>
           <Grid item xs={12} md={6} lg={7}>
-            <Paper elevation={3} style={{ height: '78vh', padding: '4px' }}>
+            <Paper elevation={3} style={{ height: '600px', padding: '4px' }}>
               <Map companies={companies} />
             </Paper>
           </Grid>

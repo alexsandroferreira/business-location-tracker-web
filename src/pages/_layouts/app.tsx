@@ -11,11 +11,13 @@ export function AppLayout() {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
+        width: '100%',
         backgroundColor: 'background.default',
       }}
     >
       <Navbar />
       <Container
+        component="main"
         maxWidth="xl"
         sx={{
           flex: 1,
@@ -23,11 +25,11 @@ export function AppLayout() {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          paddingTop: '12px',
-          paddingottom: '12px',
+          paddingTop: '80px',
+          paddingBottom: '24px',
         }}
       >
-        <Grid container direction="column">
+        <Grid container spacing={2} direction="column">
           <Grid item>
             <Outlet />
           </Grid>

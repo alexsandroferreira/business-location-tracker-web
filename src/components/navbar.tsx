@@ -30,13 +30,13 @@ export function Navbar() {
   }
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" color="primary">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Business Tracker
         </Typography>
 
-        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+        <Box component="nav" sx={{ display: { xs: 'none', md: 'flex' } }}>
           <Button
             color="inherit"
             component={Link}
