@@ -92,4 +92,5 @@ e exibidos no mapa;
 
 1. Clone o projeto: `git clone https://github.com/alexsandroferreira/business-location-tracker-web.git`.
 2. Instale as dependências e ative husky: `npm install` e `npm prepare`.
+3. Crie o arquivo `.env.local` com dados do `.env.local.example`.
 3. Para iniciar a aplicação execute `npm run build` e `npm run preview`.
