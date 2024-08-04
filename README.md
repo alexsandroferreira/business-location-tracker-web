@@ -1,3 +1,4 @@
+
 #  Business Location Tracker 
 ![](https://github.com/alexsandroferreira/business-location-tracker-web/workflows/CHANGELOG%20Generator/badge.svg)
 [![Release](https://img.shields.io/github/v/release/alexsandroferreira/business-location-tracker-web?color=lgreen)](https://github.com/alexsandroferreira/business-location-tracker-web/releases)
@@ -5,6 +6,12 @@
 Business Location Tracker é um aplicativo que permite simular o registro de empresas e visualizar a localização dessas empresas em um mapa interativo. Utilizando a API Nominatim da OpenStreetMap, o projeto exibe as localizações no mapa através da biblioteca react-leaflet 
 
 Além disso, a integração contínua será implementada para automatizar o versionamento de código utilizando a biblioteca Release-it.
+
+## Demo 📸
+
+<h1 aling="center">
+  <img alt="Readme-business-location" src="/public/img/demo-2.gif">
+</h1>
 
 ## Adições pessoais para melhor desenvolvimento do projeto
 
