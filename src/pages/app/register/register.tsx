@@ -1,16 +1,18 @@
 import { Box, Container, Grid, Paper } from '@mui/material'
+import { Helmet } from 'react-helmet-async'
 
 import { AnimatedBackground } from '../../../components/AnimatedBackground'
 import { CompanyForm } from '../../../components/companyForm'
 import { Map } from '../../../components/map'
 import { useCompanies } from '../../../hooks/usecompanies'
-import { BackgroundWrapper, ContentWrapper, StyledHome } from './styles'
+import { BackgroundWrapper, ContentWrapper, StyledRegister } from './styles'
 
-export function Home() {
+export function Register() {
   const { companies, handleAddCompany } = useCompanies()
 
   return (
-    <StyledHome>
+    <StyledRegister>
+      <Helmet title="Register" />
       <Container maxWidth="xl" component="div">
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} md={6} lg={5}>
@@ -32,6 +34,6 @@ export function Home() {
           </Grid>
         </Grid>
       </Container>
-    </StyledHome>
+    </StyledRegister>
   )
 }

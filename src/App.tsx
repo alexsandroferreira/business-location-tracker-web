@@ -1,3 +1,4 @@
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { RouterProvider } from 'react-router-dom'
 import { Toaster } from 'sonner'
 
@@ -7,7 +8,10 @@ export function App() {
   return (
     <>
       <Toaster richColors closeButton />
-      <RouterProvider router={router} />
+      <HelmetProvider>
+        <Helmet titleTemplate="%s | business.location" />
+        <RouterProvider router={router} />
+      </HelmetProvider>
     </>
   )
 }

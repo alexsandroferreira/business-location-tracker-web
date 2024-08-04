@@ -1,6 +1,6 @@
 import { styled } from '@mui/material'
 
-export const StyledHome = styled('section')(() => ({
+export const StyledRegister = styled('section')(() => ({
   height: '100%',
   display: 'flex',
   alignItems: 'center',

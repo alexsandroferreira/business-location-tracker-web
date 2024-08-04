@@ -1,4 +1,5 @@
 import { Box, Container, Grid, Paper, Typography } from '@mui/material'
+import { Helmet } from 'react-helmet-async'
 
 import { AnimatedBackground } from '../../../components/AnimatedBackground'
 import { Logo } from '../../../components/logo'
@@ -7,6 +8,7 @@ import { BackgroundWrapper, ContentWrapper, StyledHero } from './styles'
 export function Hero() {
   return (
     <StyledHero>
+      <Helmet title="Hero" />
       <Container maxWidth="lg">
         <Grid container spacing={4} alignItems="center" justifyContent="center">
           <Grid item xs={12} md={6}>
