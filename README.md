@@ -10,7 +10,7 @@ Além disso, a integração contínua será implementada para automatizar o vers
 ## Demo 📸
 
 <h1 aling="center">
-  <img alt="Readme-business-location" src="/public/img/demo-2.gif">
+  <img alt="Readme-business-location" src="/public/img/demo.gif">
 </h1>
 
 ## Adições pessoais para melhor desenvolvimento do projeto
