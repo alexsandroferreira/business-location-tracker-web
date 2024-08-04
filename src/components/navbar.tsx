@@ -43,7 +43,7 @@ export function Navbar() {
             to="/hero"
             sx={getButtonStyle('/hero')}
           >
-            Hero
+            About
           </Button>
           <Button
             color="inherit"
@@ -79,7 +79,7 @@ export function Navbar() {
                 to="/hero"
                 sx={getButtonStyle('/hero')}
               >
-                Hero
+                About
               </MenuItem>
               <MenuItem
                 onClick={closeMenu}

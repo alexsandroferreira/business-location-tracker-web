@@ -25,7 +25,7 @@ export function AppLayout() {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          paddingTop: '80px',
+          paddingTop: { xs: '80px', sm: '88px' },
           paddingBottom: '24px',
         }}
       >
