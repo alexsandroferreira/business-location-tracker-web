@@ -7,6 +7,8 @@ Business Location Tracker é um aplicativo que permite simular o registro de emp
 
 Além disso, a integração contínua será implementada para automatizar o versionamento de código utilizando a biblioteca Release-it.
 
+- [Link para a aplicação implantada »](https://business-location-tracker-web.vercel.app/)
+
 ## Demo 📸
 
 <h1 aling="center">
@@ -39,7 +41,6 @@ Este projeto foi construído com as seguintes tecnologias:
 - [Typescript »](https://www.typescriptlang.org)
 - [Eslint »](https://eslint.org/docs/latest/)
 - [Eslint style guide »](https://github.com/Rocketseat/eslint-config-rocketseat)
-- [@eslint-plugin-simple-import-sort »](https://github.com/lydell/eslint-plugin-simple-import-sort)
 - [@eslint-plugin-simple-import-sort »](https://github.com/lydell/eslint-plugin-simple-import-sort)
 - [React Helmet Async »](https://github.com/staylor/react-helmet-async/)
 - [Marterial Design framework de interface »](https://mui.com/material-ui/)
