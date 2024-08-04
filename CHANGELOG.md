@@ -1,5 +1,7 @@
 # Changelog
 
+## [0.1.1](https://github.com/alexsandroferreira/business-location-tracker-web/compare/0.1.0...0.1.1) (2024-08-04)
+
 ## 0.1.0 (2024-08-04)
 
 
