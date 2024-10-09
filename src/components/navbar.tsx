@@ -42,6 +42,7 @@ export function Navbar() {
             component={Link}
             to="/hero"
             sx={getButtonStyle('/hero')}
+            data-test="navbar-hero-link"
           >
             About
           </Button>
@@ -50,18 +51,23 @@ export function Navbar() {
             component={Link}
             to="/"
             sx={getButtonStyle('/')}
+            data-test="navbar-register-link"
           >
             Register
           </Button>
         </Box>
 
-        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+        <Box
+          sx={{ display: { xs: 'flex', md: 'none' } }}
+          data-test="navbar-mobile-menu"
+        >
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
             onClick={openMenu}
+            data-test="navbar-menu-button"
           >
             <MenuIcon />
           </IconButton>
@@ -71,6 +77,7 @@ export function Navbar() {
             open={Boolean(anchorNav)}
             onClose={closeMenu}
             sx={{ display: { xs: 'flex', md: 'none' } }}
+            data-test="navbar-menu"
           >
             <MenuList>
               <MenuItem
@@ -78,6 +85,7 @@ export function Navbar() {
                 component={Link}
                 to="/hero"
                 sx={getButtonStyle('/hero')}
+                data-test="navbar-mobile-hero-link"
               >
                 About
               </MenuItem>
@@ -86,6 +94,7 @@ export function Navbar() {
                 component={Link}
                 to="/"
                 sx={getButtonStyle('/')}
+                data-test="navbar-mobile-register-link"
               >
                 Register
               </MenuItem>

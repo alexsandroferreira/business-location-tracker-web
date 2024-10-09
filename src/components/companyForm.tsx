@@ -43,6 +43,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               {...register('companyName')}
               error={!!errors.companyName}
               helperText={errors.companyName?.message}
+              data-test="company-name"
             />
           </Grid>
           <Grid item xs={12}>
@@ -53,6 +54,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               {...register('businessName')}
               error={!!errors.businessName}
               helperText={errors.businessName?.message}
+              data-test="business-name"
             />
           </Grid>
 
@@ -67,6 +69,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               onChange={(e) => {
                 e.target.value = insertMaskInCNPJ(e.target.value)
               }}
+              data-test="cnpj"
             />
           </Grid>
 
@@ -79,6 +82,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               error={!!errors.country}
               helperText={errors.country?.message}
               autoComplete="off"
+              data-test="country"
             />
           </Grid>
 
@@ -90,6 +94,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               {...register('state')}
               error={!!errors.state}
               helperText={errors.state?.message}
+              data-test="state"
             />
           </Grid>
 
@@ -101,6 +106,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               {...register('city')}
               error={!!errors.city}
               helperText={errors.city?.message}
+              data-test="city"
             />
           </Grid>
 
@@ -115,6 +121,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               onChange={(e) => {
                 e.target.value = insertMaskInCEP(e.target.value)
               }}
+              data-test="postalcode"
             />
           </Grid>
 
@@ -126,6 +133,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               {...register('county')}
               error={!!errors.county}
               helperText={errors.county?.message}
+              data-test="county"
             />
           </Grid>
 
@@ -137,6 +145,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               {...register('streetname')}
               error={!!errors.streetname}
               helperText={errors.streetname?.message}
+              data-test="streetname"
             />
           </Grid>
 
@@ -148,6 +157,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               {...register('housenumber')}
               error={!!errors.housenumber}
               helperText={errors.housenumber?.message}
+              data-test="housenumber"
             />
           </Grid>
 
@@ -160,6 +170,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               error={!!errors.complement}
               helperText={errors.complement?.message}
               autoComplete="off"
+              data-test="complement"
             />
           </Grid>
           <Grid item xs={12} container justifyContent="center">
@@ -168,6 +179,7 @@ export function CompanyForm({ onAddCompany }: CompanyFormProps) {
               type="submit"
               variant="contained"
               color="primary"
+              data-test="submit-button"
             >
               Registre
             </Button>

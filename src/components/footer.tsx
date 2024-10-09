@@ -11,6 +11,7 @@ export function Footer() {
       textAlign="center"
       bgcolor="primary.main"
       color="white"
+      data-test="footer"
     >
       <Container maxWidth="xl">
         <Typography variant="body1">
@@ -22,6 +23,7 @@ export function Footer() {
             justifyContent: 'center',
             gap: 2,
           }}
+          data-test="footer-icons"
         >
           <IconButton
             component={Link}
@@ -33,8 +35,9 @@ export function Footer() {
                 animation: `${bounce} 0.4s linear`,
               },
             }}
+            data-test="footer-github-link"
           >
-            <GitHub />
+            <GitHub data-test="footer-github-icon" />
           </IconButton>
 
           <IconButton
@@ -47,6 +50,7 @@ export function Footer() {
                 animation: `${bounce} 0.4s linear`,
               },
             }}
+            data-test="footer-linkedin-link"
           >
             <LinkedIn />
           </IconButton>
