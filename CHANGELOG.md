@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/alexsandroferreira/business-location-tracker-web/compare/0.1.1...0.2.0) (2024-10-09)
+
+
+### Features | 🏁
+
+* added data-test in components ([04c9fa4](https://github.com/alexsandroferreira/business-location-tracker-web/commit/04c9fa4c6a8687efea09f7fe6ba02787aeb1a432))
+
 ## [0.1.1](https://github.com/alexsandroferreira/business-location-tracker-web/compare/0.1.0...0.1.1) (2024-08-04)
 
 ## 0.1.0 (2024-08-04)
